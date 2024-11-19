@@ -8,4 +8,6 @@ class User < ApplicationRecord
 
   has_many :followers, through: :sent_follow_requests
   has_many :followings, through: :received_follow_requests
+
+  validates :username, presence: true
 end

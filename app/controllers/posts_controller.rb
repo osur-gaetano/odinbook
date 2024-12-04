@@ -12,10 +12,12 @@ class PostsController < ApplicationController
   end
 
   def create
+    @author = current_user
     @post = Post.new(post_params)
+    @post.author = @author
 
     if @post.save
-      redirect_to @posts, notice: "Post was successfully created."
+      redirect_to @post, notice: "Post was successfully created."
     else
       render :new, status: :unprocessable_entity
     end

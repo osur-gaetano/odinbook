@@ -8,3 +8,13 @@
 
   <%= button_to "Delete this post", @post, method: :delete %>
 </div>
+
+<h2> <strong> Add comment: </strong></h2>
+<div>
+  <%= render "comments/form", post: @post%>
+</div>
+
+<div>
+  <h2> <strong> Comments: </strong></h2>
+    <%= render(partial: "comments/comment", collection: @post.comments) || 'There are no comments yet'%>
+</div>

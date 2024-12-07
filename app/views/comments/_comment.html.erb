@@ -1,0 +1,8 @@
+<div>
+  <p>
+    <% if comment.user %>
+      <strong> <%= comment.user.username %>:</strong>
+      <%= comment.content %>
+    <%end%>
+  </p>
+</div>

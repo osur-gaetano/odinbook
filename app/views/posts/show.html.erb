@@ -9,6 +9,18 @@
   <%= button_to "Delete this post", @post, method: :delete %>
 </div>
 
+
+<div>
+  <p>
+   <%= button_to 'Like', like_path(@post), method: :put %> | <%= button_to 'Unlike', unlike_path(@post), method: :delete %>
+  </p>
+
+  <h2><Strong>Likes</strong></h2>
+  <p><%= pluralize(@likes_count, "like" )%></p>
+
+</div>
+
+
 <h2> <strong> Add comment: </strong></h2>
 <div>
   <%= render "comments/form", post: @post%>

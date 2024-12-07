@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments
   end
+
+  put "posts/:id/like", to: "posts#like", as: "like"
+  delete "posts/:id/like", to: "posts#unlike", as: "unlike"
+
+
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Render dynamic PWA files from app/views/pwa/*

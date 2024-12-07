@@ -1,10 +1,11 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_post, only: %i[show edit update destroy like unlike]
   def index
     @posts = Post.all
   end
 
   def show
+    @likes_count = @post.count_likes
   end
 
   def new
@@ -38,6 +39,17 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy!
     redirect_to root_path, status: :see_other, notice: "Post was successfuly deleted!"
+  end
+
+  def like
+    @post.add_like(current_user.id)
+    redirect_to @post
+  end
+
+  def unlike
+    @like = @post.likes.find_by(user_id: current_user.id)
+    @like.destroy! unless @like.nil?
+    redirect_to @post
   end
 
   private

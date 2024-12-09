@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_03_154922) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_09_200952) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,6 +29,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_03_154922) do
     t.bigint "following_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status", default: "pending"
     t.index ["follower_id"], name: "index_follow_requests_on_follower_id"
     t.index ["following_id"], name: "index_follow_requests_on_following_id"
   end

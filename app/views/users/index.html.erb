@@ -1,0 +1,40 @@
+<% content_for :title, "Users"%>
+
+<h1> <strong>Potential friends</strong> </h1>
+<br>
+<div>
+  <% @potential_friends.each do |user|%>
+    <%= render user %>
+    <%= button_to "Send Follow Request", send_follow_request_path(user.id), method: :put %>
+  <%end%>
+</div>
+<br>
+
+<h1> <strong>Pending follow requests</strong> </h1>
+<br>
+<div>
+  <% @pending_followers.each do |user|%>
+    <%= render user %>
+    <p> Accept Pending Follow request </p>
+  <%end%>
+  <% @pending_followings.each do |user|%>
+    <%= render user %>
+    <p> Pending follow request </p>
+  <%end%>
+</div>
+<br>
+
+
+<h1> <strong>Accepted follow requests </strong></h1>
+<br>
+<div>
+  <% @accepted_followers.each do |user|%>
+    <%= render user %>
+    <p> view friend's profile </p>
+  <%end%>
+  <% @accepted_followings.each do |user|%>
+    <%= render user %>
+    <p> view friend's profile </p>
+  <%end%>
+</div>
+<br>

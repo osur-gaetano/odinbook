@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   delete "posts/:id/like", to: "posts#unlike", as: "unlike"
 
 
+  put "users/send_request/:following_id", to: "users#send_request", as: "send_follow_request"
+
+
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Render dynamic PWA files from app/views/pwa/*

@@ -15,6 +15,10 @@ Rails.application.routes.draw do
 
 
   put "users/send_request/:following_id", to: "users#send_request", as: "send_follow_request"
+  put "users/approve_request/:follower_id", to: "users#approve_request", as: "approve_follow_request"
+  delete "users/reject_request/:follower_id", to: "users#reject_request", as: "reject_follow_request"
+
+
 
 
   get "up" => "rails/health#show", as: :rails_health_check

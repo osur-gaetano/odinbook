@@ -34,4 +34,11 @@ class User < ApplicationRecord
     self.sent_follow_requests.build(following: following)
     self.save
   end
+
+
+  def accept_follow_request(follower)
+    @request = self.received_follow_requests.find_by(follower_id: follower.id)
+    @request.status = "approved"
+    @request.save
+  end
 end

@@ -22,11 +22,6 @@ class User < ApplicationRecord
   has_many :pending_followings, through: :sent_follow_requests, source: :following
   has_many :pending_followers, through: :received_follow_requests, source: :follower
 
-  scope :potential_friends, -> {
-    where.not(id: FollowRequest.select(:follower_id))
-    .where.not(id: FollowRequest.select(:following_id))
-  }
-
   validates :username, presence: true
 
 

@@ -1,7 +1,13 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy like unlike]
   def index
-    @posts = Post.all
+    @accepted_followers = current_user.followers
+    @accepted_followings = current_user.followings
+
+    @user_posts = current_user.posts
+    @follower_posts = @accepted_followers.each_with_object([]) { |follower, results| results << follower.posts }
+    @following_posts = @accepted_followings.each_with_object([]) { |following, results| results << following.posts }
+    @feed = [ @user_posts, @follower_posts, @following_posts ].flatten.sort_by { |post| post.created_at }.reverse
   end
 
   def show

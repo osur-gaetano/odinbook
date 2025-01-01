@@ -4,7 +4,7 @@
 <h1>Posts</h1>
 <br>
 <div>
-  <% @posts.each do |post|%>
+  <% @feed.each do |post|%>
     <%= render post %>
     <p>
       <%= link_to "Show this post", post %>

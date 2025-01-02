@@ -29,4 +29,8 @@ class User < ApplicationRecord
     self.sent_follow_requests.build(following: following)
     self.save
   end
+
+  def follow_request_not_sent
+    User.where.not(id: sent_follow_requests.select(:following_id)).where.not(id: approved_sent_follow_requests.select(:following_id))
+  end
 end

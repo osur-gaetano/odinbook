@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :find_follow_requests, only: %i[reject_request approve_request]
 
   def index
-    @potential_friends = User.where.not(id: current_user.id)
+    @potential_friends = current_user.follow_request_not_sent.where.not(id: current_user.id)
 
     @pending_followers = current_user.pending_followers
     @accepted_followers = current_user.followers

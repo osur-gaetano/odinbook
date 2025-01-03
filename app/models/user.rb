@@ -33,4 +33,12 @@ class User < ApplicationRecord
   def follow_request_not_sent
     User.where.not(id: sent_follow_requests.select(:following_id)).where.not(id: approved_sent_follow_requests.select(:following_id))
   end
+
+  def count_followers
+    self.followers.count
+  end
+
+  def count_followings
+    self.followings.count
+  end
 end

@@ -1,0 +1,16 @@
+<h1><strong> Profile </strong></h1>
+<br>
+<div>
+  <%= render "user", user: @user %>
+</div>
+<br>
+
+<p><%= pluralize(@current_user_follower_count, "follower" )%>  | <%= pluralize(@current_user_following_count, "following" )%></p>
+
+
+<br>
+<h2><strong><%= @user.username%>'s Posts</strong></h2>
+<br>
+<% @current_user_posts.each do |post|%>
+  <%= render "posts/post", post: post %>
+<%end%>

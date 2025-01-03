@@ -14,6 +14,13 @@ class UsersController < ApplicationController
     @accepted_followings = current_user.followings
   end
 
+  def show
+    @user = current_user
+    @current_user_posts = @user.posts
+    @current_user_follower_count = @user.count_followers
+    @current_user_followin_count = @user.count_followings
+  end
+
   def send_request
     current_user.send_follow_request(@following)
     redirect_to users_path

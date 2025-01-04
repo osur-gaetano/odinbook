@@ -59,3 +59,6 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
+
+gem "omniauth-github"
+gem "omniauth-rails_csrf_protection"

@@ -2,7 +2,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, omniauth_providers: [ :github ]
   has_many :posts, inverse_of: "author"
   has_many :likes, inverse_of: :user
   has_many :comments, inverse_of: :user
@@ -24,6 +25,36 @@ class User < ApplicationRecord
 
   validates :username, presence: true
 
+  def self.from_omniauth(auth)
+    find_or_create_by(provider: auth.provider, uid: auth.uid) do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
+      user.username = auth.info.name
+    end
+  end
+
+  def self.new_with_session(paramas, session)
+    if session["devise.github_data"]
+      new(session["devise.github_data"], without_protection: true) do |user|
+        user.attributes = params
+        user.valid?
+      end
+    else
+      super
+    end
+  end
+
+  def password_requirred?
+    super && provider.blank?
+  end
+
+  def update_with_password(params, *options)
+    if encrypted_password.blank?
+      update_attributes(params, *options)
+    else
+      super
+    end
+  end
 
   def send_follow_request(following)
     self.sent_follow_requests.build(following: following)
